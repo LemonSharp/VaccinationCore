@@ -1,0 +1,49 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: lemonsharp.azurecr.io
+        username: lemonsharp
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "LemonSharp.VaccinationCore.API/Dockerfile" -t lemonsharp.azurecr.io/vaccination-core:latest -t lemonsharp.azurecr.io/vaccination-core:${{ github.sha }} --label dockerfile-path=Dockerfile
+        docker push lemonsharp.azurecr.io/vaccination-core:latest
+        docker push lemonsharp.azurecr.io/vaccination-core:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.AKS_CONFIG }}
+      id: login
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        container-registry-url: lemonsharp.azurecr.io
+        container-registry-username: lemonsharp
+        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        secret-name: containerregistryauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: default
+        manifests: |
+          manifests/deployment.yml
+          manifests/hpa.yml
+          manifests/service.yml
+        images: |
+          lemonsharp.azurecr.io/vaccination-core:${{ github.sha }}
+        imagepullsecrets: |
+          containerregistryauth
