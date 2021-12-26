@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemonSharp.VaccinationCore.API", "LemonSharp.VaccinationCore.API\LemonSharp.VaccinationCore.API.csproj", "{F7AFD5F4-35FC-4163-8FF4-08005E72ECEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemonSharp.VaccinationCore.Application", "LemonSharp.VaccinationCore.Application\LemonSharp.VaccinationCore.Application.csproj", "{C1A9C4B1-BD08-498F-8D05-6B06FBCC8C08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemonSharp.VaccinationCore.Domain", "LemonSharp.VaccinationCore.Domain\LemonSharp.VaccinationCore.Domain.csproj", "{96426B14-29CD-416C-A6B8-A96E6E891147}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemonSharp.VaccinationCore.Infrastructure", "LemonSharp.VaccinationCore.Infrastructure\LemonSharp.VaccinationCore.Infrastructure.csproj", "{F21E22F1-9995-411A-93FD-B7C3AB634686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemonSharp.VaccinationCore.Query", "LemonSharp.VaccinationCore.Query\LemonSharp.VaccinationCore.Query.csproj", "{9F8D10F2-C182-4F39-AFB2-E5BCF8528E0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7AFD5F4-35FC-4163-8FF4-08005E72ECEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7AFD5F4-35FC-4163-8FF4-08005E72ECEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7AFD5F4-35FC-4163-8FF4-08005E72ECEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7AFD5F4-35FC-4163-8FF4-08005E72ECEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A9C4B1-BD08-498F-8D05-6B06FBCC8C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A9C4B1-BD08-498F-8D05-6B06FBCC8C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A9C4B1-BD08-498F-8D05-6B06FBCC8C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A9C4B1-BD08-498F-8D05-6B06FBCC8C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96426B14-29CD-416C-A6B8-A96E6E891147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96426B14-29CD-416C-A6B8-A96E6E891147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96426B14-29CD-416C-A6B8-A96E6E891147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96426B14-29CD-416C-A6B8-A96E6E891147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F21E22F1-9995-411A-93FD-B7C3AB634686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21E22F1-9995-411A-93FD-B7C3AB634686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F21E22F1-9995-411A-93FD-B7C3AB634686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F21E22F1-9995-411A-93FD-B7C3AB634686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F8D10F2-C182-4F39-AFB2-E5BCF8528E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F8D10F2-C182-4F39-AFB2-E5BCF8528E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F8D10F2-C182-4F39-AFB2-E5BCF8528E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F8D10F2-C182-4F39-AFB2-E5BCF8528E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
