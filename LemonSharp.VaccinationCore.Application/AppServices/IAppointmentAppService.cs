@@ -6,5 +6,6 @@ public interface IAppointmentAppService
 {
     Task<BusinessResult> CreateAppointmentAsync(CreateAppointmentRequestDTO request);
     
-    Task<BusinessResult> UpdateAppointmentAsync(CancelAppointmentRequestDTO request);
+    Task<BusinessResult> CancelAppointmentAsync(CancelAppointmentRequestDTO request);
+    Task<BusinessResult> GetCurrentAppointmentStatusAsync(Guid userId);
 }

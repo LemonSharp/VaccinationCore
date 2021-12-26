@@ -1,4 +1,5 @@
 using LemonSharp.VaccinationCore.Domain.AggregatesModel.UserAggregate;
+using LemonSharp.VaccinationCore.Domain.AggregatesModel.VaccinationPlanAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,8 +10,6 @@ public class VaccinationPlanEntityConfiguration : IEntityTypeConfiguration<Vacci
     public void Configure(EntityTypeBuilder<VaccinationPlan> builder)
     {
         builder.ToTable("VaccinationPlans");
-
-        builder.Ignore(x => x.DomainEvents);
 
         builder.HasKey(x => x.Id);
         

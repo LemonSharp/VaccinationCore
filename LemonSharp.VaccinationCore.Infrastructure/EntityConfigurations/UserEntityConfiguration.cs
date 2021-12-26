@@ -1,4 +1,5 @@
 ﻿using LemonSharp.VaccinationCore.Domain.AggregatesModel.UserAggregate;
+using LemonSharp.VaccinationCore.Domain.AggregatesModel.VaccinationPlanAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,8 +12,6 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("Users");
 
         builder.HasKey(b => b.Id);
-
-        builder.Ignore(b => b.DomainEvents);
 
         builder.HasMany(b => b.AppointmentRecords)
             .WithOne()

@@ -1,8 +1,9 @@
-﻿using LemonSharp.VaccinationCore.Domain.SeedWork;
+﻿using LemonSharp.VaccinationCore.Domain.AggregatesModel.VaccinationPlanAggregate;
+using LemonSharp.VaccinationCore.Domain.SeedWork;
 
 namespace LemonSharp.VaccinationCore.Domain.AggregatesModel.UserAggregate;
 
-public  class User : Entity, IAggregateRoot
+public class User : Entity, IAggregateRoot
 {
     public string Name { get; private set; }
 
@@ -13,7 +14,6 @@ public  class User : Entity, IAggregateRoot
     public VaccinationPlan VaccinationPlan { get; private set; }
 
     private List<AppointmentRecord> _appointmentRecords;
-
     public IReadOnlyCollection<AppointmentRecord> AppointmentRecords => _appointmentRecords?.AsReadOnly();
 
     public User(string name, int age, string phoneNumber)
@@ -36,6 +36,12 @@ public  class User : Entity, IAggregateRoot
             addressName, appointmentDate));
     }
 
+    public void CancelAppointment(Guid appointmentRecordId)
+    {
+        var appointment = _appointmentRecords.Single(x => x.Id == appointmentRecordId);
+        appointment.Cancel();
+    }
+
 
     public RecommendedAppointment NextRecommendedAppointment()
     {
@@ -45,6 +51,11 @@ public  class User : Entity, IAggregateRoot
         }
 
         var nextPlan = VaccinationPlan.NextPlan();
+        
+        if (nextPlan == null)
+        {
+            return null;
+        }
 
         var lastAppointment =
             _appointmentRecords.Where(x => x.Status == AppointmentStatus.Accepted)
@@ -55,5 +66,15 @@ public  class User : Entity, IAggregateRoot
             nextPlan.SerialNumber,
             nextPlan.IntervalDays,
             lastAppointment.SiteId);
+    }
+
+    public bool IsAppointmentInProgress()
+    {
+        return _appointmentRecords?.Any(x => x.Status == AppointmentStatus.Pending) ?? false;
+    }
+
+    public bool IsVaccinationDone()
+    {
+        return VaccinationPlan?.IsDone() ?? false;
     }
 }

@@ -10,7 +10,6 @@ public class AppointmentRecordEntityConfiguration : IEntityTypeConfiguration<App
     {
         builder.ToTable("AppointmentRecords");
         
-        builder.Ignore(x => x.DomainEvents);
         
         builder.HasKey(x => x.Id);
     }

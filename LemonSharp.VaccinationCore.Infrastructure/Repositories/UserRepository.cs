@@ -18,7 +18,10 @@ public class UserRepository : IUserRepository
 
     public Task<User> GetAsync(Guid id)
     {
-        return _context.Users.SingleOrDefaultAsync(x => x.Id == id);
+        return _context.Users
+            .Include(x => x.VaccinationPlan)
+            .Include(x => x.AppointmentRecords)
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public User Add(User user)
