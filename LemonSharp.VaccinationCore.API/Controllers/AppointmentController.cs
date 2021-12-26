@@ -1,5 +1,7 @@
 using LemonSharp.VaccinationCore.Application.AppServices;
 using LemonSharp.VaccinationCore.Application.DTOs;
+using LemonSharp.VaccinationCore.Query;
+using LemonSharp.VaccinationCore.Query.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LemonSharp.VaccinationCore.API.Controllers;
@@ -7,11 +9,14 @@ namespace LemonSharp.VaccinationCore.API.Controllers;
 [Route("/api/[controller]/[action]")]
 public class AppointmentController : Controller
 {
+    private readonly IAppointmentQueries _appointmentQueries;
+
     private readonly IAppointmentAppService _appointmentAppService;
 
-    public AppointmentController(IAppointmentAppService appointmentAppService)
+    public AppointmentController(IAppointmentAppService appointmentAppService, IAppointmentQueries appointmentQueries)
     {
         _appointmentAppService = appointmentAppService;
+        _appointmentQueries = appointmentQueries;
     }
 
     [HttpPost]
@@ -33,5 +38,11 @@ public class AppointmentController : Controller
     {
         var result = await _appointmentAppService.GetCurrentAppointmentStatusAsync(userId);
         return Ok(result);
+    }
+
+    [HttpGet]
+    public Task<AppointmentItemDTO[]> List([FromQuery] AppointmentListRequestDTO request)
+    {
+        return _appointmentQueries.GetAppointmentList(request);
     }
 }

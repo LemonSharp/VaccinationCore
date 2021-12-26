@@ -3,6 +3,7 @@ using LemonSharp.VaccinationCore.Domain.AggregatesModel.UserAggregate;
 using LemonSharp.VaccinationCore.Domain.AggregatesModel.VaccinationPlanAggregate;
 using LemonSharp.VaccinationCore.Infrastructure;
 using LemonSharp.VaccinationCore.Infrastructure.Repositories;
+using LemonSharp.VaccinationCore.Query;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
+
+builder.Services.AddSingleton<IAppointmentQueries, AppointmentQueries>();
+builder.Services.AddSingleton<IVaccinationQueries, VaccinationQueries>();
 
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<IAppointmentAppService, AppointmentAppService>();
