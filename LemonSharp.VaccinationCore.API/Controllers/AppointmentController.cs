@@ -1,3 +1,4 @@
+using Dapr;
 using LemonSharp.VaccinationCore.Application.AppServices;
 using LemonSharp.VaccinationCore.Application.DTOs;
 using LemonSharp.VaccinationCore.Query;
@@ -20,6 +21,7 @@ public class AppointmentController : Controller
     }
 
     [HttpPost]
+    [Topic("pubsub", "AppointmentCompletedEvent")]
     public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentRequestDTO request)
     {
         var result = await _appointmentAppService.CreateAppointmentAsync(request);
@@ -27,6 +29,7 @@ public class AppointmentController : Controller
     }
     
     [HttpPost]
+    [Topic("pubsub", "AppointmentCanceledEvent")]
     public async Task<IActionResult> CancelAppointment([FromBody] CancelAppointmentRequestDTO request)
     {
         var result = await _appointmentAppService.CancelAppointmentAsync(request);
